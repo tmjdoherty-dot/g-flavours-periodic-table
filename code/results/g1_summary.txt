@@ -1,0 +1,44 @@
+Onsets (first z with f > 0.02 per flavour) vs Madelung; z = Z/g. Real elements: Z = g z.
+shell  Mad      inf       4       3       2      2c       1
+   2p  2.00     2.17    2.08    2.08    2.08    2.50    2.08
+   3s  5.00     2.08    5.08    5.08    5.08    5.50    5.08
+   3p  6.00     6.17    6.08    6.08    6.08    6.50    6.08
+   4s  9.00     6.08    9.08    9.08    9.08    9.50    9.08
+   3d 10.00    10.58   10.25   10.17   10.08   10.50    9.58
+   4p 15.00    10.17   10.08   10.08   15.08   15.50   15.08
+   5s 18.00    10.08   18.08   18.08   18.08   18.50   18.08
+   4d 19.00    19.58   19.33   19.25   19.08   19.50   18.83
+   5p 24.00    19.17   19.08   19.08   24.08   24.50   24.08
+   6s 27.00    19.08   27.08   27.08   27.08   27.50   27.08
+   4f 28.00    29.00   28.67   28.50   28.25   28.50   27.50
+   5d 35.00    28.42   28.08   28.08   28.08   28.50   27.42
+   6p 40.00    28.17   28.08   35.17   40.17   40.50   40.17
+   7s 43.00    28.08   43.17   43.17   43.17   43.50   43.17
+   5f 44.00    45.17   44.83   44.67   44.33   44.50   43.67
+   6d 51.00    44.33   44.17   44.17   44.17   44.50   43.33
+   7p 56.00    44.17   51.17   56.17   56.17   56.50   56.17
+   8s 59.00    44.67   59.17   59.17   59.17   59.50     nan
+   5g 60.00      nan     nan     nan     nan     nan   59.33
+
+Filling order by onset (ties broken by Madelung order):
+  g=inf: 3s 2p 4s 3p 5s 4p 3d 6s 5p 4d 7s 6p 5d 4f 7p 6d 8s 5f
+  g=  4: 2p 3s 3p 4s 4p 3d 5s 5p 4d 6s 5d 6p 4f 7s 6d 5f 7p 8s
+  g=  3: 2p 3s 3p 4s 4p 3d 5s 5p 4d 6s 5d 4f 6p 7s 6d 5f 7p 8s
+  g=  2: 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 5d 4f 6p 7s 6d 5f 7p 8s
+  g= 2c: 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p 7s 5f 6d 7p 8s
+  g=  1: 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 5d 4f 6p 7s 6d 5f 7p 5g
+  Madelung: 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p 7s 5f 6d 7p 8s 5g
+
+Deviation from Madelung: share of the z-range [0.25, 60] where |f - f_Madelung|_1 > 0.1 per flavour
+  g=inf: 0.310  (unconverged points err>1e-5: 111)
+  g=  4: 0.327  (unconverged points err>1e-5: 53)
+  g=  3: 0.332  (unconverged points err>1e-5: 30)
+  g=  2: 0.391  (unconverged points err>1e-5: 14)
+  g= 2c: 0.450  (unconverged points err>1e-5: 0)
+  g=  1: 0.558  (unconverged points err>1e-5: 1)
+
+Real chemistry check (g = 2 rows at integer Z): non-Madelung if total |f - f_Mad|_1 > 1 electron (Cr-type 4s->3d shift = 2)
+  2: LDA non-Madelung Z = [25, 26, 27, 28, 29, 42, 43, 44, 45, 46, 47, 60, 62, 63, 66, 67, 74, 75, 76, 77, 78, 79, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 105, 106, 107, 108, 109, 110, 111, 120]
+      experiment exceptions caught 11/20; extra (LDA only) 29
+  2c: LDA non-Madelung Z = [24, 25, 26, 27, 28, 29, 42, 43, 44, 45, 46, 47, 66, 67, 68, 69, 74, 75, 76, 77, 78, 79, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 105, 106, 107, 108, 109, 110, 111, 120]
+      experiment exceptions caught 12/20; extra (LDA only) 28

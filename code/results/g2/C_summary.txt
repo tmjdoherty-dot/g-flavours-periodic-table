@@ -1,0 +1,12 @@
+rows 662, failed/unconverged 132
+g=1: 5d count of ground per element: 0 0 0 0 0 0 0
+      La-type step (delta=1 takes 5d): no  E(4f1)-E(5d1) = -3.65 eV;  elements with 5d occupied: 0/7
+g=2: 5d count of ground per element: 1 0 0 0 0 0 0 1 0 0 0 0 0 0
+      La-type step (delta=1 takes 5d): yes  E(4f1)-E(5d1) = +0.08 eV;  elements with 5d occupied: 2/14
+      experiment: 1 1 0 0 0 0 0 1 0 0 0 0 0 0;  agree 13/14
+g=3: 5d count of ground per element: 1 2 1 1 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 0 0
+      La-type step (delta=1 takes 5d): yes  E(4f1)-E(5d1) = +8.62 eV;  elements with 5d occupied: 15/21
+g=4: 5d count of ground per element: 1 2 2 2 2 2 1 1 2 2 2 1 1 1 1 2 2 2 1 1 1 1 2 2 2 1 1 1
+      La-type step (delta=1 takes 5d): yes  E(4f1)-E(5d1) = +5.52 eV;  elements with 5d occupied: 28/28
+g=6: 5d count of ground per element: 1 2 2 2 2 ? 2 2 2 2 2 ? 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2
+      La-type step (delta=1 takes 5d): yes  E(4f1)-E(5d1) = +3.26 eV;  elements with 5d occupied: 40/42
