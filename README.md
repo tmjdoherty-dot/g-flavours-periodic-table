@@ -15,17 +15,23 @@ Rescaling turns the g-flavour atom into a one-parameter family. In per-flavour u
 Main results, from exchange-only LDA scans and then Hartree–Fock (HF) with exact exchange:
 
 1. **Each block starts at the same z = Z/g for every g** (within ±0.85 per-flavour electrons), as Thomas–Fermi scaling predicts. Stronger exchange brings d and f shells in slightly earlier.
-2. **The Cr/Cu-type exceptions of the free 3d atoms come from same-flavour (exchange) terms.**
-   - In HF with maximal flavour polarisation (Hund), the share of the 3d block with a non-Madelung ground configuration is 0.80 / 0.30 / 0 / 0 / 0 / 0 / 0 for g = 1 / 2 / 3 / 4 / 5 / 6 / 8.
-   - At g = 2 the same HF gets 11 of 12 real ground-state s occupancies in each d row, including Cr, Cu, Nb, Mo, Ru, Rh, Ag and Pd 4d¹⁰5s⁰.
-3. **About half of the free-atom 4d-row anomaly survives with direct Coulomb alone.**
-   - The 4d exception share falls 0.80 → 0.70 → 0.60 → 0.45 → 0.44 → 0.37 → 0.38 as g grows. It levels off where the direct-Coulomb (Hartree) limit puts the 5s drain (0.35).
-   - In the λ = 0 limit the 3d row is exactly Madelung, while the 4d row is not.
+2. **The Cr/Cu-type and 4d-row exceptions of free atoms come from exchange between different orbitals, not from self-interaction removal.**
+   - At g = 2, HF with maximal flavour polarisation (Hund) gets 11 of 12 real ground-state s occupancies in each d row, including Cr, Cu, Nb, Mo, Ru, Rh, Ag and Pd 4d¹⁰5s⁰.
+   - With direct Coulomb only (self-interaction removed), the same atoms have no exceptions in the 3d row and only Pd in the 4d row (Result 6).
+   - Across g, the 3d exception share in Hund mode is 0.80 / 0.30 / 0 / 0 / 0 / 0 / 0 for g = 1 / 2 / 3 / 4 / 5 / 6 / 8.
+3. **The large-g limit keeps some 4d exceptions; real atoms without exchange do not.**
+   - The 4d exception share falls 0.80 → 0.70 → 0.60 → 0.45 → 0.44 → 0.37 → 0.38 as g grows. It levels off near the direct-Coulomb (Hartree) drain at g → ∞ (0.35). The self-interaction-free direct-Coulomb model rises towards the same region from below (0.10 → 0.25).
+   - The dial 1/g scales exchange and the self-interaction correction together. So the large-g limit is not the same as "the real atom without exchange", and the large-g 4d exceptions say little about real 4d atoms.
 4. **With direct Coulomb only, 3d is not yet bound when 4s fills.** At λ = 0 the 3d level is an unbound continuum state until z ≈ 10.5, so 4p starts filling first. The head start of p before d grows smoothly with g in both LDA and HF. This is the d-orbital collapse after the ns shell fills (Connerade 1991; Chen, Li & Schwarz 2021), happening later when the same-flavour terms are switched off.
 5. **The La/Ac step (one d electron before the f shell) depends on g.**
    - HF: absent at g = 1 (4f lower by 3.7 eV), present at g = 2 by only 0.08 eV, and strong for g ≥ 3 (3–9 eV).
    - At g = 2, HF matches 13 of 14 lanthanide ground configurations.
    - The real free La atom sits just on the d-first side of a boundary.
+6. **Splitting the Coulomb terms at g = 2.** Self-interaction-free direct Coulomb → + exchange between orbitals → + flavour polarisation takes the d-block exception share from 0 → 0.20 → 0.30 (3d) and 0.10 → 0.60 → 0.70 (4d). Direct Coulomb *with* self-interaction (plain Hartree) does not even bind the outermost electron of a neutral atom at g = 2, so that split is ill-defined for real atoms.
+7. **Cations follow the regular d^(g−q) s⁰ pattern only for small g.**
+   - With one electron removed per flavour (M²⁺ at g = 2), HF gives d^n s⁰ for every 3d and 4d dication (Hund and configuration average), as observed.
+   - Direct Coulomb alone would leave s electrons in 40% (3d) and 30% (4d) of the dications, so the regular cation pattern also needs exchange.
+   - From g = 4 on, cations increasingly keep s electrons (3d row, Hund: 0.30 / 0.57 / 0.65 at g = 4 / 6 / 8).
 
 No earlier treatment of a g-flavour periodic table was found (searches on spinless, SU(N) and spin-degeneracy variants of the periodic table and on large-N atoms; see *Related work*).
 
@@ -77,7 +83,8 @@ $$
 - **Solver:** direct minimisation on the radial grid. Occupied–virtual steps use an Olsen (Jacobi–Davidson-type) correction with a tridiagonal LDA reference Hamiltonian, falling back to plain gradient steps when that direction is not downhill. Rotations between occupied shells of equal l and different occupation are handled explicitly. Steps use Löwdin re-orthonormalisation and backtracking on E.
 - **Grid:** r_min = 10⁻⁹. Total energies on N = 1600 and 2400 points, extrapolated with the h² law.
 - **Starting guess:** an LDA calculation with the configuration's own occupations held fixed. This matters for double-well f orbitals: with an empty-4f guess, Ce converged to the extended 4f solution, 0.14 Ha too high.
-- **Runs:** ~18,000 HF calculations on Modal (`modal_jobs/hf_modal.py`).
+- **Modes:** configuration average, Hund, and self-interaction-free direct Coulomb (`mode='sicfree'`: every exchange term dropped, pair counts q(q−1)/2, so no electron interacts with itself).
+- **Runs:** ~30,000 HF calculations on Modal (`modal_jobs/hf_modal.py`).
 
 ## Validation
 
@@ -152,6 +159,37 @@ Configurations [Xe] 6s^g 4fˣ 5dʸ with y ≤ 2:
 
 f counts lock at multiples of 7 (whole flavours, a generalised Gd). At g ≥ 4 the ground state often sits at the y = 2 cap, so states with more 5d electrons may be lower.
 
+### 6. Splitting the Coulomb terms (HF, neutral atoms)
+Share of the d block with an exception, by model:
+
+| row | model | g = 1 | 2 | 3 | 4 | 6 | 8 |
+|---|---|---|---|---|---|---|---|
+| 3d | direct Coulomb, self-interaction removed | 0.00 | 0.00 | 0.07 | 0.05 | 0.10 | 0.10 |
+| 3d | + exchange (configuration average) | 0.80 | 0.20 | 0 | 0 | 0 | 0 |
+| 3d | + flavour polarisation (Hund) | 0.80 | 0.30 | 0 | 0 | 0 | 0 |
+| 4d | direct Coulomb, self-interaction removed | 0.00 | 0.10 | 0.13 | 0.25 | 0.20 | 0.25 |
+| 4d | + exchange (configuration average) | 0.80 | 0.60 | 0.53 | 0.45 | 0.40 | 0.38 |
+| 4d | + flavour polarisation (Hund) | 0.80 | 0.70 | 0.60 | 0.45 | 0.37 | 0.38 |
+
+- At g = 2 the self-interaction-free direct-Coulomb model gets 10/12 (3d) and 6/12 (4d) real s occupancies. It puts every 3d atom at 4s², and every 4d atom at 5s² except Pd (5s¹).
+- At small g exchange creates the exceptions. At g ≥ 3 in the 3d row it removes the few that the direct-Coulomb model has.
+- 474 of 3176 direct-Coulomb runs did not converge and are excluded.
+
+### 7. Cations (HF, one electron removed per flavour)
+Share of the d block whose ground configuration keeps s electrons:
+
+| row | model | g = 1 | 2 | 3 | 4 | 6 | 8 |
+|---|---|---|---|---|---|---|---|
+| 3d | direct Coulomb, self-interaction removed | 0.00 | 0.40 | 0.60 | 0.75 | 0.80 | 0.82 |
+| 3d | configuration average | 0.00 | 0.00 | 0.00 | 0.20 | 0.40 | 0.53 |
+| 3d | Hund | 0.00 | 0.00 | 0.00 | 0.30 | 0.57 | 0.65 |
+| 4d | direct Coulomb, self-interaction removed | 0.00 | 0.30 | 0.47 | 0.45 | 0.47 | 0.50 |
+| 4d | configuration average | 0.00 | 0.00 | 0.13 | 0.20 | 0.33 | 0.38 |
+| 4d | Hund | 0.00 | 0.00 | 0.07 | 0.30 | 0.37 | 0.42 |
+
+- At g = 2, every dication Sc²⁺–Zn²⁺ and Y²⁺–Cd²⁺ comes out d^n s⁰, as observed.
+- All 8604 cation runs converged.
+
 ## Limitations
 - Non-relativistic throughout. The real 5d row has few exceptions (Pt, Au) because relativity contracts 6s; the model drains 6s fully. That gap is a measure of the relativistic effect, which is known (Pyykkö) but not quantified here.
 - No correlation, apart from the LDA reference row. HF misses V, Zr and Ce at g = 2. Correlation is part of the Coulomb interaction; its g-dependence is not studied.
@@ -181,8 +219,7 @@ Requirements: Python 3.11, NumPy, SciPy; Modal for the HF scans. Run everything 
 | LDA analysis | `python g1_analyse.py results/g1_scan_run2.npz` and `python g1_analyse2.py results/g1_scan_run2.npz` | seconds |
 | LDA hysteresis | `python g1_hyst.py` | ~5 min |
 | HF checks | `python hf_check.py` (reference energies), `python check_ce.py` (Ce with the fixed-occupation start) | ~1–2 min each |
-| HF scans | `python -m modal run modal_jobs/hf_modal.py --parts A` (also `--parts A --guess fixed`, `--parts B`, `--parts C`) | 35–55 min wall each on Modal |
-| HF analysis | `python g2_analyse_A.py results/g2/A.json results/g2/A_fixed.json`, `python g2_analyse_B.py`, `python g2_analyse_C.py` | seconds |
+| HF scans | `python -m modal run modal_jobs/hf_modal.py --parts A` (also `--parts A --guess fixed`, `--parts B`, `--parts C`, `--parts D`, `--parts E`) | 8–55 min wall each on Modal |
+| HF analysis | `python g2_analyse_A.py results/g2/A.json results/g2/A_fixed.json`, `python g2_analyse_B.py`, `python g2_analyse_C.py`, `python g2_analyse_DE.py` | seconds |
 
 The run data used for every table are included in `code/results/`. `notes/working_notes.md` is the running write-up made during the work.
-
