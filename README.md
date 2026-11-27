@@ -1,34 +1,39 @@
-# g-flavours-periodic-table
-The periodic table with g electron spin flavours
+# The periodic table with g electron spin flavours
 
 Author: Thomas Doherty, with computational and proof assistance from Claude (Anthropic)
 
 ## Summary
 
-Electrons have two spin states, and every shell capacity in chemistry, 2(2l+1), quietly depends on that. This repository asks what the periodic table looks like when electrons have **g** internal states (g = 1, 2, 3, …, ∞). The aim is to separate what in the table comes from plain electrostatics from what comes from exchange.
+Electrons have two spin states, and every shell capacity in chemistry, 2(2l+1), quietly depends on that. This repository asks what the periodic table of free atoms looks like when electrons have **g** internal states (g = 1, 2, 3, …, ∞). It is a thought experiment. The aim is to separate what in the ground configurations comes from the flavour-blind direct Coulomb term and what comes from same-flavour terms: exchange, which in mean-field theory also cancels each electron's interaction with itself.
 
 Rescaling turns the g-flavour atom into a one-parameter family. In per-flavour units the problem is the g = 1 atom with nuclear charge z = Z/g, and exchange enters multiplied by **λ = 1/g**:
 
-- g → ∞ (λ = 0) is pure electrostatics, the exact mean-field (Hartree) limit;
-- g = 2 (λ = ½) is real chemistry;
+- g → ∞ (λ = 0) is direct Coulomb only: the Hartree limit, which becomes exact as g → ∞ (self-interaction and correlation both vanish there);
+- g = 2 (λ = ½) is real electrons;
 - g = 1 (λ = 1) is spinless electrons.
 
 Main results, from exchange-only LDA scans and then Hartree–Fock (HF) with exact exchange:
 
 1. **Each block starts at the same z = Z/g for every g** (within ±0.85 per-flavour electrons), as Thomas–Fermi scaling predicts. Stronger exchange brings d and f shells in slightly earlier.
-2. **The Cr/Cu-type exceptions in the 3d row are exchange effects.**
+2. **The Cr/Cu-type exceptions of the free 3d atoms come from same-flavour (exchange) terms.**
    - In HF with maximal flavour polarisation (Hund), the share of the 3d block with a non-Madelung ground configuration is 0.80 / 0.30 / 0 / 0 / 0 / 0 / 0 for g = 1 / 2 / 3 / 4 / 5 / 6 / 8.
    - At g = 2 the same HF gets 11 of 12 real ground-state s occupancies in each d row, including Cr, Cu, Nb, Mo, Ru, Rh, Ag and Pd 4d¹⁰5s⁰.
-3. **About half of the 4d-row anomaly survives without exchange.**
-   - The 4d exception share falls 0.80 → 0.70 → 0.60 → 0.45 → 0.44 → 0.37 → 0.38 as g grows. It levels off where the pure-electrostatics limit puts the 5s drain (0.35).
+3. **About half of the free-atom 4d-row anomaly survives with direct Coulomb alone.**
+   - The 4d exception share falls 0.80 → 0.70 → 0.60 → 0.45 → 0.44 → 0.37 → 0.38 as g grows. It levels off where the direct-Coulomb (Hartree) limit puts the 5s drain (0.35).
    - In the λ = 0 limit the 3d row is exactly Madelung, while the 4d row is not.
-4. **Without exchange, 3d is not bound when 4s fills.** At λ = 0 the 3d level is an unbound continuum state until z ≈ 10.5, so 4p starts filling first. The head start of p before d grows smoothly with g in both LDA and HF.
+4. **With direct Coulomb only, 3d is not yet bound when 4s fills.** At λ = 0 the 3d level is an unbound continuum state until z ≈ 10.5, so 4p starts filling first. The head start of p before d grows smoothly with g in both LDA and HF. This is the d-orbital collapse after the ns shell fills (Connerade 1991; Chen, Li & Schwarz 2021), happening later when the same-flavour terms are switched off.
 5. **The La/Ac step (one d electron before the f shell) depends on g.**
    - HF: absent at g = 1 (4f lower by 3.7 eV), present at g = 2 by only 0.08 eV, and strong for g ≥ 3 (3–9 eV).
    - At g = 2, HF matches 13 of 14 lanthanide ground configurations.
-   - Real chemistry sits just on the d-first side of a boundary.
+   - The real free La atom sits just on the d-first side of a boundary.
 
 No earlier treatment of a g-flavour periodic table was found (searches on spinless, SU(N) and spin-degeneracy variants of the periodic table and on large-N atoms; see *Related work*).
+
+## Scope and terminology
+- **Free atoms only.** Every result concerns the ground configuration of an isolated atom in vacuum. Atoms bound in compounds and metals behave far more regularly. Cations in complexes are close to (n−1)d^(g−q) ns⁰, and metals are close to (n−1)d^(g−1) ns¹ throughout the row, whatever the free atom does (Chen, Li & Schwarz 2021). The free-atom irregularities studied here therefore have little direct relevance to chemistry. The question is where they come from.
+- **Configurations, not states.** "Ground configuration" means the leading configuration of the lowest state. HF energies here are averages over a configuration or over its maximally flavour-polarised (high-spin) part, not individual angular-momentum-coupled states.
+- **Madelung as bookkeeping.** "Exception" means a ground configuration that differs from "ns full before (n−1)d". This is used as a counting reference only. The (n+l, n) rule is not claimed to describe orbital energies; for the d block it does not (Wang, Qiu, Fang & Schwarz 2006; Chen, Li & Schwarz 2021).
+- **How the Coulomb energy is split.** The Coulomb interaction has direct, exchange and correlation parts. The split between direct and exchange is not unique: the spurious self-interaction can be added to the direct term and subtracted in the exchange term. Here, "same-flavour terms" means everything multiplied by 1/g in the rescaled mean-field energy, including the self-interaction cancellation. Result 6 separates the two by removing self-interaction from the direct term first. Correlation is not included; at g → ∞ it vanishes, at g = 2 it does not.
 
 ## The one-dial rescaling
 
@@ -149,7 +154,8 @@ f counts lock at multiples of 7 (whole flavours, a generalised Gd). At g ≥ 4 t
 
 ## Limitations
 - Non-relativistic throughout. The real 5d row has few exceptions (Pt, Au) because relativity contracts 6s; the model drains 6s fully. That gap is a measure of the relativistic effect, which is known (Pyykkö) but not quantified here.
-- No correlation, apart from the LDA reference row. HF misses V, Zr and Ce at g = 2.
+- No correlation, apart from the LDA reference row. HF misses V, Zr and Ce at g = 2. Correlation is part of the Coulomb interaction; its g-dependence is not studied.
+- Free atoms only (see *Scope*). No statement is made about atoms in molecules or solids.
 - Spherical averaging within shells (configuration average or flavour-resolved average); no individual multiplets beyond the Hund state.
 - At λ = 0 the f-filling windows (z ≈ 30–34 and 46–50) never converge. Two fillings alternate, most likely the known dual collapsed/extended f solutions.
 - The fractional HF scans are qualitative (see Result 2).
@@ -157,6 +163,9 @@ f counts lock at multiples of 7 (whole flavours, a generalised Gd). At g ≥ 4 t
 ## Related work
 - Thomas–Fermi onsets of l shells: Fermi (1928). Madelung failure at very large Z: Bjerg, Fournais, Hearnshaw, Solovej, [arXiv:2506.14227](https://arxiv.org/abs/2506.14227).
 - Transition-metal configurations and the Madelung rule: W. H. E. Schwarz, *J. Chem. Educ.* **87**, 444 (2010).
+- Free atoms versus bound atoms; d and s populations in metals and complexes: K. Chen, W.-L. Li, W. H. E. Schwarz, *Z. Naturforsch. B* (2021), [doi:10.1515/znb-2021-0139](https://doi.org/10.1515/znb-2021-0139).
+- The so-called electron configurations of the transition metals: S.-G. Wang, Y.-X. Qiu, H. Fang, W. H. E. Schwarz, *Chem. Eur. J.* **12**, 4101 (2006).
+- d-orbital collapse after the ns shell fills (the mechanism behind Result 4): J.-P. Connerade, *J. Phys. B* **24**, L109 (1991).
 - Fractional-occupation spherical HF/HFS for all atoms H–Og: S. Lehtola, *Phys. Rev. A* **101**, 012516 (2020), [arXiv:1908.02528](https://arxiv.org/abs/1908.02528).
 - Orbital collapse and dual solutions: Goeppert Mayer (1941); Tupitsyn et al., *Phys. Rev. A* **109**, 042807 (2024), [arXiv:2402.02609](https://arxiv.org/abs/2402.02609).
 - Periodic table in other dimensions: [atom-ph/9512001](https://arxiv.org/abs/atom-ph/9512001).
@@ -176,3 +185,4 @@ Requirements: Python 3.11, NumPy, SciPy; Modal for the HF scans. Run everything 
 | HF analysis | `python g2_analyse_A.py results/g2/A.json results/g2/A_fixed.json`, `python g2_analyse_B.py`, `python g2_analyse_C.py` | seconds |
 
 The run data used for every table are included in `code/results/`. `notes/working_notes.md` is the running write-up made during the work.
+
